@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './components/common/searchBar';
-import WeatherDetails from '../src/components/weatherDetails';
-import Loader from '../src/components/common/loader';
+import WeatherDetails from './components/weatherDetails';
 import { fetchWeatherData, fetchCityCoordinates, fetchCurrentLocationWeather } from './utils/api';
 import Button from './components/common/button';
 import '../src/components/weatherDetails.css';
+import WeatherCardLoader from './components/weatherCardLoader';
+import cloudImage from './assets/cloud.png';
 
 const App: React.FC = () => {
-
-  // State variables for managing the application state
   const [cityName, setCityName] = useState('');
   const [weatherData, setWeatherData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [city, setCity] = useState('');
 
-  // Function to handle search based on city name input
   const handleSearch = async () => {
+    if (!cityName.trim()) {
+      setError('Please enter a city name');
+      return; // Stop further execution if city name is empty
+    }
     setLoading(true);
     setError(null);
     try {
@@ -25,21 +27,19 @@ const App: React.FC = () => {
       setCity(coordinates.city);
       setWeatherData(forecast);
       setLoading(false);
-
     } catch (error) {
       setLoading(false);
-      setError('City not found or API error occurred');
+      setError('City not found. Please enter correct city name');
     }
   };
 
-  // Function to fetch weather data based on the user's current location
   const handleCurrentLocation = async () => {
     setLoading(true);
     setError(null);
     try {
       const data = await fetchCurrentLocationWeather();
       setWeatherData(data);
-      setCity(''); // Reset the city state when using current location
+      setCity('');
       setLoading(false);
     } catch (error) {
       setError('Unable to fetch location or API error occurred');
@@ -47,15 +47,33 @@ const App: React.FC = () => {
     }
   };
 
-  // Determine which city name to display - either the city from API or user input
   const displayedCity = city ? city : weatherData?.cityName || '';
+
+  useEffect(() => {
+    // JavaScript logic to make the cloud image move continuously
+    const cloudImageElement = document.getElementById('cloudImage') as HTMLImageElement;
+    if (cloudImageElement) {
+      let position = -cloudImageElement.width; // Start off-screen to the left
+      const speed = 1;  // Adjust speed of movement
+      const animateCloud = () => {
+        position += speed;
+        if (position > window.innerWidth) {
+          position = -cloudImageElement.width;
+        }
+        cloudImageElement.style.transform = `translateY(-50%) translateX(${position}px)`;
+        requestAnimationFrame(animateCloud);
+      };
+      animateCloud(); // Start the animation
+    }
+  }, []);
 
   return (
     <div className="app">
       <header>
-        <h1 className='text-center p-5'>Weather Dashboard</h1>
+        <h1 className="text-center p-5">Weather Dashboard</h1>
       </header>
-      <div className='d-flex justify-content-between m-5 mt-0'>
+
+      <div className="d-flex justify-content-between m-5 mt-0">
         <SearchBar
           inputValue={cityName}
           setInputValue={setCityName}
@@ -63,18 +81,32 @@ const App: React.FC = () => {
           inputPlaceholder="Enter city name"
           searchButtonText="Search"
         />
-        <Button onClick={handleCurrentLocation} label={'Current Location'}></Button>
+        <Button onClick={handleCurrentLocation} label="Current Location" />
       </div>
 
-      {loading && <Loader />}
-      {error && <p className="error">{error}</p>}
-      {weatherData && !loading &&
+      {error && <div className="error-msg">{error}</div>}
+      {!loading && !weatherData && !error && (
+        <div className="moving-cloud">
+          <img
+            id="cloudImage"
+            src={cloudImage}
+            alt="Moving Cloud"
+            style={{ height: '200px', position: 'absolute', top: '50%' }}
+          />
+        </div>
+      )}
+
+      {loading && <WeatherCardLoader />}
+
+      {weatherData && !loading && !error && (
         <WeatherDetails
           forecastData={weatherData.forecastData}
           sunrise={weatherData.sunrise}
           sunset={weatherData.sunset}
           city={displayedCity}
-          date={weatherData.formattedDate} />}
+          date={weatherData.formattedDate}
+        />
+      )}
     </div>
   );
 };
