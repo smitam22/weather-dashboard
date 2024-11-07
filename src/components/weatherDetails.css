@@ -1,0 +1,132 @@
+.app {
+
+  /* background: url(../assets/blue-clouds.jpg); */
+
+  background: #B2E9F4;
+  background: linear-gradient(135deg, #B2E9F4, #C2B9F9);
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+
+  .primary-btn {
+    border-radius: 0;
+  }
+
+
+  .weather-details {
+    padding-bottom: 20px;
+
+    .first-weather-card {
+      background: #79b1d4;
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+      .other-info-sec {
+        flex: 1;
+        padding: 20px;
+        margin-left: 20px;
+        flex-wrap: wrap;
+        width: 50%;
+      }
+
+      .first-sec-info {
+        width: 50%;
+      }
+    }
+
+    .today-temp {
+      font-size: 55px;
+      font-weight: 500;
+      color: #0e485a;
+    }
+
+    .temp-unit {
+      font-size: 45px;
+      color: #0e485a;
+      margin-bottom: 6px;
+    }
+
+    .today-date {
+      font-weight: 500;
+    }
+
+    .weather-desc {
+      margin-left: 35px;
+      color: #0e485a;
+
+      font-size: 30px;
+      font-weight: 500;
+
+
+      img {
+        margin-top: -46px;
+        height: 120px;
+        margin-bottom: -25px;
+      }
+    }
+
+    .city-name {
+      font-size: 50px;
+      margin-left: 40px;
+    }
+
+    .right-icons {
+      height: 50px;
+      width: auto;
+    }
+
+    .icon-info {
+      margin-left: 10px;
+    }
+
+    .info-value {
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    .weather-card {
+      background: url(../assets/blue-clouds.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100%;
+      padding: 20px;
+      min-width: 255px;
+      flex-grow: 1;
+
+      img {
+        width: 135px;
+        margin-top: -30px;
+        margin-bottom: -30px;
+        margin-right: -20px;
+        margin-left: -80px;
+      }
+
+      .temp-desc {
+        color: #0e485a;
+
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .card-temp {
+        font-size: 30px;
+      }
+
+      .weather-date {
+
+        font-weight: 600;
+        font-size: 25px;
+        margin-bottom: 20px;
+
+      }
+
+      .humidity-temp {
+        margin-left: 8px;
+        font-weight: 500;
+      }
+    }
+  }
+
+
+}
