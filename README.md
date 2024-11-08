@@ -1,7 +1,7 @@
 # Weather Dashboard App
 
 ## Overview
-The Weather Dashboard is a React-based application that provides weather information for a specific city or the user\u2019s current location. It leverages external APIs to fetch and display weather data in a user-friendly manner.
+The Weather Dashboard is a React-based application that provides weather information for a specific city or the user's current location. It leverages external APIs to fetch and display weather data in a user-friendly manner.
 
 ## Features
 - **City Search**: Enter a city name to get current weather information.
@@ -62,7 +62,7 @@ The Weather Dashboard is a React-based application that provides weather informa
 ## Deployment
 
  For deployment, build the project using:
- 
+
   ```bash
   npm run build
 
