@@ -31,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ inputValue,
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown} 
       />
-      <Button onClick={onSearch} label={searchButtonText} icon='fa fa-search'></Button>
+      <Button onClick={onSearch} label={searchButtonText} icon='fa fa-search me-2'></Button>
     </div>
   );
 };
