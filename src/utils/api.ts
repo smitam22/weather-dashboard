@@ -54,7 +54,7 @@ const timeOptions: Intl.DateTimeFormatOptions = {
 
 
   const days: string[] = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const date = new Date();
     date.setDate(date.getDate() + i);
 

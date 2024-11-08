@@ -82,7 +82,7 @@ const WeatherDetails: React.FC<WeatherDetailsProps> = ({ forecastData, sunset, s
       )}
 
       {/* Display forecast data for the next few days */}
-      <div className='d-flex flex-wrap justify-content-between mt-3 gap-3'>
+      <div className='d-flex flex-wrap  mt-3 gap-3'>
         {forecastData.slice(1).map((data, index) => (
           // WeatherCard component for each day in the forecast (except the first one)
           <WeatherCard

@@ -23,15 +23,15 @@ const WeatherCardLoader = () => {
         </div>
       </div>
 
-      <div className='d-flex flex-wrap justify-content-between mt-3 gap-3'>
+      <div className='d-flex flex-wrap mt-3 gap-3'>
         {/* Generate 4 weather-card-loader components */}
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((_, index) => (
           <div key={index} className='weather-card-loader d-flex flex-column align-items-center'>
-            <SkeletonLoader width="140px" height="40px" />
+            <SkeletonLoader width="190px" height="40px" />
             <br />
-            <SkeletonLoader width="140px" height="75px" />
+            <SkeletonLoader width="190px" height="75px" />
             <br />
-            <SkeletonLoader width="140px" height="40px" />
+            <SkeletonLoader width="190px" height="40px" />
           </div>
         ))}
       </div>

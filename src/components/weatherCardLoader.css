@@ -10,8 +10,7 @@
     border: 1px solid #79b1d4;
 
     padding: 20px;
-    min-width: 255px;
-    flex-grow: 1;
+    width: 368px;
     max-height: 210px;
   }
 }
