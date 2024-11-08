@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchBar from './components/common/searchBar';
 import WeatherDetails from './components/weatherDetails';
 import { fetchWeatherData, fetchCityCoordinates, fetchCurrentLocationWeather } from './utils/api';
 import Button from './components/common/button';
 import '../src/components/weatherDetails.css';
 import WeatherCardLoader from './components/weatherCardLoader';
-import cloudImage from './assets/cloud.png';
+import MovingCloud from './components/common/movingCloud/movingCloud';
+import { useWindowSize } from './utils/hooks';
 
 const App: React.FC = () => {
+
+  // State variables to manage the application state
   const [cityName, setCityName] = useState('');
   const [weatherData, setWeatherData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [city, setCity] = useState('');
 
+  const screenSize = useWindowSize();
+  // Function to handle the search functionality
   const handleSearch = async () => {
     if (!cityName.trim()) {
       setError('Please enter a city name');
@@ -33,6 +38,7 @@ const App: React.FC = () => {
     }
   };
 
+  // Function to handle fetching weather data for the current location
   const handleCurrentLocation = async () => {
     setLoading(true);
     setError(null);
@@ -47,25 +53,9 @@ const App: React.FC = () => {
     }
   };
 
+  // Determine the city name to display (either fetched city or data from API)
   const displayedCity = city ? city : weatherData?.cityName || '';
 
-  useEffect(() => {
-    // JavaScript logic to make the cloud image move continuously
-    const cloudImageElement = document.getElementById('cloudImage') as HTMLImageElement;
-    if (cloudImageElement) {
-      let position = -cloudImageElement.width; // Start off-screen to the left
-      const speed = 1;  // Adjust speed of movement
-      const animateCloud = () => {
-        position += speed;
-        if (position > window.innerWidth) {
-          position = -cloudImageElement.width;
-        }
-        cloudImageElement.style.transform = `translateY(-50%) translateX(${position}px)`;
-        requestAnimationFrame(animateCloud);
-      };
-      animateCloud(); // Start the animation
-    }
-  }, []);
 
   return (
     <div className="app">
@@ -81,19 +71,16 @@ const App: React.FC = () => {
           inputPlaceholder="Enter city name"
           searchButtonText="Search"
         />
-        <Button onClick={handleCurrentLocation} label="Current Location" />
+        {screenSize.width > 641 ? (
+          <Button onClick={handleCurrentLocation} label="Current Location" />
+        ) : (
+          <Button onClick={handleCurrentLocation} icon="fa fa-location-arrow"  tooltipText="Current Location" />
+        )}
       </div>
 
       {error && <div className="error-msg">{error}</div>}
       {!loading && !weatherData && !error && (
-        <div className="moving-cloud">
-          <img
-            id="cloudImage"
-            src={cloudImage}
-            alt="Moving Cloud"
-            style={{ height: '200px', position: 'absolute', top: '50%' }}
-          />
-        </div>
+        <MovingCloud></MovingCloud>
       )}
 
       {loading && <WeatherCardLoader />}

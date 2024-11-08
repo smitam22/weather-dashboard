@@ -1,0 +1,17 @@
+.weather-details-loader {
+  .first-weather-card {
+
+    height: 178px;
+    padding: 20px;
+    border: 1px solid #79b1d4;
+  }
+
+  .weather-card-loader {
+    border: 1px solid #79b1d4;
+
+    padding: 20px;
+    min-width: 255px;
+    flex-grow: 1;
+    max-height: 210px;
+  }
+}

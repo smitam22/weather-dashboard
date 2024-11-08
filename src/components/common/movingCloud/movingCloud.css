@@ -1,0 +1,23 @@
+.moving-cloud {
+    position: relative;
+    width: 100%;
+    height: 400px; /* You can adjust this */
+    overflow: hidden; /* Prevents the image from overflowing */
+  }
+  
+  .moving-cloud img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Centers the image vertically */
+    animation: moveCloud 30s linear infinite;
+    height: 100%; /* Ensures the image height is appropriate, or set your own value */
+  }
+  
+  @keyframes moveCloud {
+    0% {
+      transform: translateX(-100%); /* Start the image off-screen to the left */
+    }
+    100% {
+      transform: translateX(100%); /* Move it off-screen to the right */
+    }
+  }

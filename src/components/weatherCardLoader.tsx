@@ -1,5 +1,6 @@
 import React from 'react';
 import SkeletonLoader from '../components/common/skeletonLoader/skeletonLoader';
+import './weatherCardLoader.css';
 
 const WeatherCardLoader = () => {
   return (
